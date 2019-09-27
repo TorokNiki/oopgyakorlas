@@ -18,6 +18,7 @@ namespace AukcioProjekt
             beolvas("festmenyek.csv");
             randomLicit();
             felhasznaloLicit();
+            licitUtan();
             for (int i = 0; i < festmenyLista.Count; i++)
             {
                 Console.WriteLine(festmenyLista[i]);
@@ -43,7 +44,7 @@ namespace AukcioProjekt
         {
             try
             {
-                StreamReader olvas = new StreamReader(file);
+                StreamReader olvas = new StreamReader(file,Encoding.UTF8);
                 string sor = olvas.ReadLine();
                 while (olvas.EndOfStream)
                 {
@@ -116,6 +117,18 @@ namespace AukcioProjekt
                 Console.WriteLine("Hiba!! Nem számot adott meg!!");
                 Console.ReadKey();
                 throw;
+            }
+            festmenyLista[sorszam].Licit(mertek);
+            
+        }
+        public static void licitUtan()
+        {
+            for (int i = 0; i < festmenyLista.Count; i++)
+            {
+                if (festmenyLista[i].LegmagasabbLicit()>0)
+                {
+                    festmenyLista[i].setElkelt(true);
+                }
             }
         }
     }
