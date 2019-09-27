@@ -23,6 +23,8 @@ namespace AukcioProjekt
             {
                 Console.WriteLine(festmenyLista[i]);
             }
+            legdragabb();
+            Console.WriteLine("{0}db festmény van amely nem kelt el.",nemKeltEl());
         }
         public static void ketob()
         {
@@ -130,6 +132,32 @@ namespace AukcioProjekt
                     festmenyLista[i].setElkelt(true);
                 }
             }
+        }
+        public static void legdragabb()
+        {
+            int max = festmenyLista[0].LegmagasabbLicit();
+            int maxindex = 0;
+            for (int i = 1; i < festmenyLista.Count-1; i++)
+            {
+                if (max< festmenyLista[i].LegmagasabbLicit())
+                {
+                    max = festmenyLista[i].LegmagasabbLicit();
+                    maxindex = i;
+                }
+            }
+            Console.WriteLine("A legdrábább fetmény:\n"+festmenyLista[maxindex]);
+        }
+        public static int nemKeltEl()
+        {
+            int db = 0;
+            for (int i = 0; i < festmenyLista.Count; i++)
+            {
+                if (!festmenyLista[i].getElkelt())
+                {
+                    db++;
+                }
+            }
+            return db;
         }
     }
 }
